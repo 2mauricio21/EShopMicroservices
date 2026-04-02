@@ -24,7 +24,8 @@ namespace Catalog.API.Products.CreateProduct
         }
     }
 
-    internal class CreateProductHandler(IDocumentSession session, IValidator<CreateProductCommand> validator) : ICommandHandler<CreateProductCommand, CreateProductResult>
+    internal class CreateProductCommandHandler(IDocumentSession session, ILogger<CreateProductCommandHandler> logger) 
+        : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
@@ -32,10 +33,12 @@ namespace Catalog.API.Products.CreateProduct
             // save to database
             // return CreateProductResult result
 
-            var result = await validator.ValidateAsync(command, cancellationToken);
-            var errors = result.Errors.Select(x => x.ErrorMessage).ToList();
-            if (errors.Any())
-                throw new ValidationException(errors.FirstOrDefault());
+            //var result = await validator.ValidateAsync(command, cancellationToken);
+            //var errors = result.Errors.Select(x => x.ErrorMessage).ToList();
+            //if (errors.Any())
+            //    throw new ValidationException(errors.FirstOrDefault());
+
+
 
             var product = new Product
             {
