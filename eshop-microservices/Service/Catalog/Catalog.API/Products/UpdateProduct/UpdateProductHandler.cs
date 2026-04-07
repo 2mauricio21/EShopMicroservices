@@ -27,7 +27,7 @@
             var product = await session.LoadAsync<Product>(command.Id, cancellationToken);
 
             if (product is null)
-                throw new ProductNotFountException();
+                throw new ProductNotFountException(command.Id);
 
             product.Name = command.Name;
             product.Description = command.Description;

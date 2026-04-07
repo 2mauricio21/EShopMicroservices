@@ -45,7 +45,7 @@ app.UseExceptionHandler(exceptionHandlerApp =>
         {
             Title = exception.Message,
             Status = StatusCodes.Status500InternalServerError,
-            Detail = exception?.StackTrace
+            Detail = exception.StackTrace
         };
 
         var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
