@@ -16,8 +16,6 @@ builder.Services.AddMediatR(config =>
 
 builder.Services.AddValidatorsFromAssembly(assemnly);
 
-builder.Services.AddCarter();
-
 builder.Services.AddMarten(options =>
 {
     // Configure Marten to connect to the PostgreSQL database
