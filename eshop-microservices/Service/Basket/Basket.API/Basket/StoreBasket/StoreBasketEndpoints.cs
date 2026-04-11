@@ -3,7 +3,7 @@ namespace Basket.API.Basket.StoreBasket
 {
 
     public record StoreBasketRequest(ShoppingCart Cart);
-    public record StoreBasketResult(string UserName);
+    public record StoreBasketResponse(string UserName);
 
     public class StoreBasketEndpoints : ICarterModule
     {
@@ -15,11 +15,11 @@ namespace Basket.API.Basket.StoreBasket
 
                 var result = await sender.Send(command);
 
-                var response  = result.Adapt<StoreBasketResult>();
+                var response = result.Adapt<StoreBasketResponse>();
 
                 return Results.Created($"/basket/{response.UserName}", response);
             }).WithName("CreatedProduct")
-              .Produces<StoreBasketResult>(StatusCodes.Status200OK)
+              .Produces<StoreBasketResponse>(StatusCodes.Status200OK)
               .ProducesProblem(StatusCodes.Status400BadRequest)
               .WithSummary("Created Product")
               .WithDescription("Created Product");
