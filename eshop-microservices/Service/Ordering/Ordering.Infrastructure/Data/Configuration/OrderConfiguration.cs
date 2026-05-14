@@ -12,8 +12,8 @@ namespace Ordering.Infrastructure.Data.Configuration
             builder.HasKey(o => o.Id);
 
             builder.Property(o => o.Id).HasConversion(
-                orderId => orderId.Value,
-                dbId => OrderId.Of(dbId));
+                        orderId => orderId.Value,
+                        dbId => OrderId.Of(dbId));
 
             builder.HasOne<Customer>()
                 .WithMany()
@@ -52,7 +52,36 @@ namespace Ordering.Infrastructure.Data.Configuration
                         .HasMaxLength(180)
                         .IsRequired();
 
-                    addressBuilder.Property(a => a.Contry)
+                    addressBuilder.Property(a => a.Country)
+                        .HasMaxLength(50);
+
+                    addressBuilder.Property(a => a.State)
+                        .HasMaxLength(50);
+
+                    addressBuilder.Property(a => a.ZipCode)
+                        .HasMaxLength(5)
+                        .IsRequired();
+                });
+
+            builder.ComplexProperty(
+                o => o.BillingAddress, addressBuilder =>
+                {
+                    addressBuilder.Property(a => a.FirstName)
+                        .HasMaxLength(50)
+                        .IsRequired();
+
+                    addressBuilder.Property(a => a.LastName)
+                         .HasMaxLength(50)
+                         .IsRequired();
+
+                    addressBuilder.Property(a => a.EmailAddress)
+                        .HasMaxLength(50);
+
+                    addressBuilder.Property(a => a.AddressLine)
+                        .HasMaxLength(180)
+                        .IsRequired();
+
+                    addressBuilder.Property(a => a.Country)
                         .HasMaxLength(50);
 
                     addressBuilder.Property(a => a.State)

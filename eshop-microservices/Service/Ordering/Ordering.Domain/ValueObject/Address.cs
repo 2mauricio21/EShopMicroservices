@@ -1,4 +1,6 @@
-﻿namespace Ordering.Domain.ValueObject
+﻿using System.Diagnostics.Metrics;
+
+namespace Ordering.Domain.ValueObject
 {
     public record Address
     {
@@ -6,29 +8,30 @@
         public string LastName { get; } = default!;
         public string? EmailAddress { get; } = default!;
         public string AddressLine { get; } = default!;
-        public string Contry { get; } = default!;
+        public string Country { get; } = default!;
         public string State { get; } = default!;
         public string ZipCode { get; } = default!;
+        protected Address()
+        {
+        }
 
-        protected Address() { }
-
-        private Address(string firstName, string lastName, string? emailAddress, string addressLine, string contry, string state, string zipCode)
+        private Address(string firstName, string lastName, string? emailAddress, string addressLine, string country, string state, string zipCode)
         {
             FirstName = firstName;
             LastName = lastName;
             EmailAddress = emailAddress;
             AddressLine = addressLine;
-            Contry = contry;
+            Country = country;
             State = state;
             ZipCode = zipCode;
         }
 
-        public static Address Of(string firstName, string lastName, string? emailAddress, string addressLine, string contry, string state, string zipCode)
+        public static Address Of(string firstName, string lastName, string emailAddress, string addressLine, string country, string state, string zipCode)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(emailAddress);
             ArgumentException.ThrowIfNullOrWhiteSpace(addressLine);
 
-            return new Address(firstName, lastName, emailAddress, addressLine, contry, state, zipCode);
+            return new Address(firstName, lastName, emailAddress, addressLine, country, state, zipCode);
         }
     }
 }
