@@ -4,7 +4,7 @@
     {
         private readonly List<OrderItem> _orderItems = new();
         public IReadOnlyList<OrderItem> OrderItems => _orderItems.AsReadOnly();
-        public CustumerId CustomerId { get; private set; } = default!;
+        public CustomerId CustomerId { get; private set; } = default!;
         public OrderName OrderName { get; private set; } = default!;
         public Address ShippingAddress { get; private set; } = default!;
         public Address BillingAddress { get; private set; } = default!;
@@ -16,7 +16,7 @@
             private set { }
         }
 
-        public static Order Create(OrderId id, CustumerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment)
+        public static Order Create(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment)
         {
             var order = new Order
             {
