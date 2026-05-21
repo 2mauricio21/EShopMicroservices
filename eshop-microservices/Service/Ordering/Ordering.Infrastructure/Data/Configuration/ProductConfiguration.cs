@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Ordering.Domain.Models;
-using Ordering.Domain.ValueObject;
 
 namespace Ordering.Infrastructure.Data.Configuration
 {
@@ -15,6 +13,7 @@ namespace Ordering.Infrastructure.Data.Configuration
                             dbId => ProductId.Of(dbId));
 
             builder.Property(p => p.Name).HasMaxLength(100).IsRequired();
+            builder.Property(p => p.Price).IsRequired().HasColumnType("decimal(18,2)");
 
         }
     }

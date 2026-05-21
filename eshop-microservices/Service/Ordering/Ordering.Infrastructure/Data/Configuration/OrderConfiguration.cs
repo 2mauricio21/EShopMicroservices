@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Ordering.Domain.Enums;
-using Ordering.Domain.Models;
-using Ordering.Domain.ValueObject;
 
 namespace Ordering.Infrastructure.Data.Configuration
 {
@@ -38,7 +36,7 @@ namespace Ordering.Infrastructure.Data.Configuration
                 o => o.ShippingAddress, addressBuilder =>
                 {
                     addressBuilder.Property(a => a.FirstName)
-                        .HasMaxLength(50) 
+                        .HasMaxLength(50)
                         .IsRequired();
 
                     addressBuilder.Property(a => a.LastName)
@@ -117,7 +115,7 @@ namespace Ordering.Infrastructure.Data.Configuration
                     s => s.ToString(),
                     dbStatus => (OrderStatus)Enum.Parse(typeof(OrderStatus), dbStatus));
 
-            builder.Property(o => o.TotalPrice);
+            builder.Property(o => o.TotalPrice).HasColumnType("decimal(18,2)");
         }
     }
 }

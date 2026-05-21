@@ -1,12 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Ordering.Domain.Models;
-using Ordering.Domain.ValueObject;
 
 namespace Ordering.Infrastructure.Data.Configuration
 {
-    public class CustomerConfiguration  : IEntityTypeConfiguration<Customer>
+    public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
     {
-        public void Configure(EntityTypeBuilder<Customer> builder) 
+        public void Configure(EntityTypeBuilder<Customer> builder)
         {
             builder.HasKey(c => c.Id);
             builder.Property(c => c.Id).HasConversion(
@@ -19,6 +17,6 @@ namespace Ordering.Infrastructure.Data.Configuration
 
             builder.HasIndex(c => c.Email).IsUnique();
         }
-        
+
     }
 }
